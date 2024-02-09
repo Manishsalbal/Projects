@@ -1,0 +1,17 @@
+.container1{
+    position:relative;
+    width: 30%;
+    left: 29rem;
+    top: 7rem;
+
+}
+.card{
+    font-size: 1rem;
+    height:50%;
+    border-radius: 8%;
+    color: rgb(0, 0, 0);
+}
+
+input[type="text"], input[type="number"], input[type="password"]{
+    border: 1px solid black;
+}

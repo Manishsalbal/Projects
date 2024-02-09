@@ -1,0 +1,91 @@
+<div>
+    <div class="dr">
+      <button type="button" class="btn btn-primary" (click)="exportexcel()">Dwonload Report</button>
+      &nbsp;
+      <mat-form-field>
+        <input (keyup)="applyFilter($any($event.target).value)" matInput placeholder="Search">
+      </mat-form-field>
+    </div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="excel-table">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Id -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Id </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+        </ng-container>
+      
+        <!-- email Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> Email </th>
+          <td mat-cell *matCellDef="let element">{{element.email}}</td>
+        </ng-container>
+
+        <!-- loan column-->
+        <ng-container matColumnDef="loanamount">
+            <th mat-header-cell *matHeaderCellDef>Loan</th>
+            <td mat-cell *matCellDef="let element">₹{{element.loanamount}}</td>
+        </ng-container>
+
+
+        <!-- balance column-->
+        <ng-container matColumnDef="balance">
+            <th mat-header-cell *matHeaderCellDef>Balance</th>
+            <td mat-cell *matCellDef="let element">₹{{element.balance}}</td>
+        </ng-container>
+
+
+
+         <!-- Saving column-->
+         <ng-container matColumnDef="savingbalance">
+            <th mat-header-cell *matHeaderCellDef> Saving Balance </th>
+            <td mat-cell *matCellDef="let element">₹{{element.savingbalance}}</td>
+        </ng-container>
+
+         <!-- withdrawamount column-->
+         <ng-container matColumnDef="withdrawamount">
+            <th mat-header-cell *matHeaderCellDef>Withdraw Amount</th>
+            <td mat-cell *matCellDef="let element">₹{{element.withdrawamount}}</td>
+        </ng-container>
+
+         <!-- withdrawdate column-->
+         <ng-container matColumnDef="withdrawdate">
+            <th mat-header-cell *matHeaderCellDef>Withdraw Date</th>
+            <td mat-cell *matCellDef="let element">{{element.withdrawdate}}</td>
+        </ng-container>
+
+         <!-- recepient column-->
+         <ng-container matColumnDef="recipientname">
+            <th mat-header-cell *matHeaderCellDef> Recepient Name </th>
+            <td mat-cell *matCellDef="let element">{{element.recipientname}}</td>
+        </ng-container>
+
+         <!-- transferamount column-->
+         <ng-container matColumnDef="transferamount">
+            <th mat-header-cell *matHeaderCellDef>Transfer Amount</th>
+            <td mat-cell *matCellDef="let element">₹{{element.transferamount}}</td>
+        </ng-container>
+
+        <!-- transferdate column-->
+        <ng-container matColumnDef="transferdate">
+            <th mat-header-cell *matHeaderCellDef>Transfer Date</th>
+            <td mat-cell *matCellDef="let element">{{element.transferdate}}</td>
+        </ng-container>
+
+      
+     
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [length]="200" [pageSize]="5" aria-label="Select page">
+      </mat-paginator>  
+</div>

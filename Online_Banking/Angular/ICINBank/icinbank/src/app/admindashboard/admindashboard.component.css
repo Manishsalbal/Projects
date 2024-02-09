@@ -1,0 +1,22 @@
+table{
+    width:80%;
+    height:auto;
+    margin-left:120px;
+    
+}
+
+form{
+    width:30%;
+}
+
+
+mat-paginator{
+    background-color:transparent;
+    margin-right:120px;
+}
+
+.searchName{
+    margin-left:120px;
+    margin-top:10px;
+}
+

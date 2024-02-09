@@ -1,0 +1,97 @@
+
+
+.maincontainer1{
+   position:relative;
+   width:40%;
+   height:70%;
+   left:100px;
+    top:30px;
+    /* background-color:yellow; */
+}
+
+.card{
+    height:100%;
+    width:100%;
+    border-radius: 10px;
+}
+.balance{
+    position: relative;
+    width:100%;
+    height:27%;
+   
+}
+.balancelabel{
+    margin-left:50px;
+    margin-top: 40px;
+    font-size:2rem;
+}
+
+.saving{
+    position: relative;
+    width:100%;
+    height:27%;
+    top:30px;
+}
+
+.savinglabel{
+    margin-left:68px;
+    margin-top: 40px;
+    font-size:2rem;
+}
+
+.rupees{
+    position:relative;
+    font-size:2rem;
+    left:200px;
+    bottom:25px;
+}
+
+.statement{
+    position: relative;
+    top:50px;
+    left: 182px;
+}
+
+
+
+.maincontainer2{
+    position:relative;
+    /* background-color: rgb(128, 109, 0); */
+    width:50%;
+    height:70%;
+    left:650px;
+    bottom: 200px;
+ }
+
+.btn-group{
+    width:80%;
+    height:10%;
+    /* background-color: grey; */
+ }
+
+.dropdown-menu{
+    width:100%;
+
+}
+.dropdown-item:hover{
+    background-color:white;
+}
+
+
+.maincontainer3{
+    position: relative;
+    /* background-color:red; */
+    width:100%;
+    height:auto;
+    bottom:120px;
+   
+    
+}
+
+table{
+    position: relative;
+    width:90%;
+    left:50px;
+
+}
+

@@ -1,0 +1,19 @@
+
+.card{
+
+    width:30%;
+    top:100px;
+    left:450px;
+    font-size: 14px;
+    height:60%;
+    border-radius: 8%;
+    color: rgb(0, 0, 0);
+    
+}
+
+
+
+input[type="text"], input[type="number"], input[type="password"]{
+    border: 1px solid black;
+  
+}

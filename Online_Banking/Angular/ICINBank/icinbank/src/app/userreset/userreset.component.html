@@ -1,0 +1,47 @@
+    <section>
+        <div class="container1">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h3 class="t1">Reset</h3>
+                        <div class="card-content">
+                            <form autocomplete="off" #userresetdata="ngForm" (ngSubmit)="userReset(userresetdata)">
+                                <div class="form-group">
+                                    <label for="username">Name</label>
+                                    <input type="text" name="username" id="username" class="form-control" placeholder="Name" [(ngModel)]="userResetData.username">
+                                </div>  
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input [type] = "passType" name="password" id="password" class="form-control" placeholder="Password" [(ngModel)]="userResetData.password"><br>
+                                    <input type = "checkbox" (click)="changePasswordType()"> Show Password
+                                </div>  
+                                
+                                <div class="form-group">
+                                    <label for="password">Email</label>
+                                    <input type="text" name="email" id="email" class="form-control" placeholder="Email" [(ngModel)]="userResetData.email">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password">Address</label>
+                                    <input type="text" name="address" id="address" class="form-control" placeholder="Address" [(ngModel)]="userResetData.address">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password">Phone Number</label>
+                                    <input type="number" name="phonenumber" id="phonenumber" class="form-control" placeholder="Number" [(ngModel)]="userResetData.phonenumber">
+                                </div>
+                                  
+                                <div class="form-group">
+                                    <input type="submit" value="Reset" class="btn btn-primary">
+        
+                                </div>
+                              
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </section>
+   

@@ -1,0 +1,269 @@
+
+
+<div class="main" *ngFor="let i of d">
+
+    <div class="maincontainer1">
+
+        <div class="balance">
+            <div class="card shadow-lg">
+                <label class="balancelabel">Balance :</label>
+                    <!---->
+                <label class="rupees" style="color:green;">₹ {{i.balance}}</label>
+            </div>
+        </div>
+
+       <div class="saving">
+        <div class="card shadow-lg">
+            <label class="savinglabel">Saving :</label>
+            <!---->
+            <label class="rupees" style="color:blue;">₹ {{i.savingbalance}}</label>
+        </div>
+       </div>
+
+       <div class="statement">
+        <button class="btn btn-primary"  (click)="getAll()">
+        Show Statement 
+        </button>
+        &nbsp;
+        <button class="btn btn-primary"  (click)="exportexcel()">
+            Download Statement 
+        </button>
+       </div>
+       
+        
+
+    </div>
+   
+    <div class="maincontainer2">
+
+        <!--Deposit section-->
+        <div class="btn-group shadow-sm">
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:rgb(0, 0, 0);">
+              Deposit
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-item">
+                    <form autocomplete="off" #baldata="ngForm" (ngSubmit)="addBalance(baldata,i.username)">
+                        <div class="form-group">
+                            <input #balance (ngModel)="balance" type="text" class="form-control" placeholder="₹" name="balance">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Add" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+          </div>
+
+
+          <!--Withdraw section-->
+          <div class="btn-group shadow-sm">
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:rgb(0, 0, 0);">
+              Withdraw
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-item">
+                    <form #withdata="ngForm" (ngSubmit)="withdrawMoney(i.username,withdata)">
+                        <div class="form-group">
+                            <input #withdrawamount (ngModel)="withdrawamount" type="number" class="form-control" placeholder="₹" name="withdrawamount">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Withdraw" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+          </div>
+
+
+
+          <!--transfer section-->
+          <div class="btn-group shadow-sm">
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:rgb(0, 0, 0);">
+            Transfer
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-item">
+                    <form autocomplete="off" #trandata="ngForm" (ngSubmit)="transferMoney(i.username,trandata)">
+                        <div class="form-group">
+                            <input #username (ngModel)="username" type="text" class="form-control" placeholder="Recipient Name" name="username">
+                        </div>
+                        <div class="form-group">
+                            <input #balance (ngModel)="balance" type="number" class="form-control" placeholder="₹" name="balance">
+                        </div>
+    
+                        <div class="form-group">
+                            <input type="submit" value="Transfer" class="btn btn-primary">
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+          </div>
+
+
+
+          <!--transfer between primary and secondary section-->
+          <div class="btn-group shadow-sm">
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:rgb(0, 0, 0);">
+            Transfer Between Primary/Saving Account 
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-item">
+                   
+                    <form autocomplete="off" #bdata="ngForm" (ngSubmit)="transferMoneyBetweenAccount(i.username,bdata)">
+                        <div class="form-group" >
+                          
+                          <input [(ngModel)]="accounttype.tfaccount1" type="checkbox" id="Primary" name="account1" value="Primary">
+                          &nbsp;
+                          <label for="Primary">Primary</label>
+                          &nbsp;
+                          &nbsp;
+                          <input [(ngModel)]="accounttype.tfaccount2"  type="checkbox" id="Saving" name="account2" value="Saving">
+                          &nbsp;
+                          <label for="Saving">Saving</label>
+                        </div>
+                    
+                        <div class="form-group l7" *ngIf="this.accounttype.tfaccount1">
+                            <input #balance (ngModel)="balance" type="number" name="balance" placeholder="₹" class="form-control">
+                        </div>
+                        
+                        <div class="form-group l7" *ngIf="this.accounttype.tfaccount2">
+                          <input #savingbalance (ngModel)="savingbalance" type="number" name="savingbalance" placeholder="₹" class="form-control">
+                      </div>
+                     
+                        <div class="form-group l8">
+                          <input type="submit" class="btn btn-primary">
+                      </div>
+  
+                  </form>
+                </div>
+            </div>
+          </div>
+
+
+
+          <!--cheque book section-->
+          <div class="btn-group shadow-sm">
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:rgb(0, 0, 0);">
+            Cheque Book Request
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-item">
+                    
+                        <form autocomplete="off" #chequerequestdata="ngForm" (ngSubmit)="chequerequests(i.username,chequerequestdata)">
+                        
+                            <input #chequerequest (ngModel)="chequerequest"  type="radio" name="chequerequest" value="Primary"> Primary<br />
+                            <input #chequerequest (ngModel)="chequerequest" type="radio" name="chequerequest" value="Saving"> Saving <br /><br />
+                            <input type="submit" class="btn btn-primary">
+                     
+                        </form>
+            
+                </div>
+            </div>
+          </div>
+
+
+
+          <!--apply for loan section-->
+          <div class="btn-group shadow-sm">
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:rgb(0, 0, 0);">
+            Apply for Loan 
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-item">
+                    <form autocomplete="off" #loanrequestdata="ngForm" (ngSubmit)="loanrequests(i.username,loanrequestdata)">
+                        
+                        <input #loanrequest (ngModel)="loanrequest"  type="radio" name="loanrequest" value="Primary"> Primary<br/>
+                        <input #loanrequest (ngModel)="loanrequest" type="radio" name="loanrequest" value="Saving"> Saving <br/>
+                        <div class="form-group l7">
+                        <input #loanamount (ngModel)="loanamount" type="number" name="loanamount" placeholder="₹" class="form-control">
+                        </div>
+                        
+                        <input type="submit" class="btn btn-primary">
+                 
+                    </form>
+                </div>
+            </div>
+          </div>
+
+
+
+          <!--Notification section section-->
+          <div class="btn-group shadow-sm">
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:rgb(0, 0, 0);">
+             Notification 
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-item">
+                    <!---->
+                    <label style="font-size:14px;">Cheque Request : {{i.chequerequest}}</label>
+                    &nbsp;
+                    &nbsp;
+                    <label style="font-size:14px;">Cheque Status : 
+                        <label *ngIf="i.chequerequeststatus == 'Approve'" style="color:green;">{{i.chequerequeststatus}}</label>
+                        <label *ngIf="i.chequerequeststatus == 'Decline'" style="color:red;">{{i.chequerequeststatus}}</label>
+                    </label>
+                    <br>
+                    <label style="font-size:14px;">Loan Request : {{i.loanrequest}}</label>
+                    &nbsp;
+                  
+                    <label style="font-size:14px;">Loan Amount : ₹{{i.loanamount}}</label>
+                    &nbsp;
+                   
+                    <label style="font-size:14px;">Loan Status : 
+                        <label *ngIf="i.loanstatus == 'Approve'" style="color:green;">{{i.loanstatus}}</label>
+                        <label *ngIf="i.loanstatus == 'Decline'" style="color:red;">{{i.loanstatus}}</label>
+                    </label>
+                    <br>
+
+                </div>
+            </div>
+          </div>
+
+
+    </div>
+
+
+
+    
+    <div class="maincontainer3">
+
+        <!--Table section-->
+        <table class="table table-bordered shadow bg-white rounded" *ngIf=flag id="excel-table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Balance</th>
+                    <th>Saving Balance</th>
+                    <th>Withdraw Amount</th>
+                    <th>Withdraw Date</th>
+                    <th>Recipient Name</th>
+                    <th>Transfer Amount</th>
+                    <th>Transfer Date</th>
+                   
+                    
+                </tr>
+            </thead>
+            <tbody class="tbody">
+                <tr *ngFor="let j of d">
+                    <td>{{j.username}}</td>
+                    <td>{{j.email}}</td>
+                    <td>{{j.phonenumber}}</td>
+                    <td>₹{{j.balance}}</td>
+                    <td>₹{{j.savingbalance}}</td>
+                    <td>₹{{j.withdrawamount}}</td>
+                    <td>{{j.withdrawdate}}</td>
+                    <td>{{j.recipientname}}</td>
+                    <td>₹{{j.transferamount}}</td>
+                    <td>{{j.transferdate}}</td>
+                    
+                </tr>
+            </tbody>
+        </table>
+       
+    </div>
+</div>
+   

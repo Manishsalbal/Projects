@@ -1,0 +1,103 @@
+
+<div class="maincontainer">
+   
+    <div class="searchName">
+        <mat-form-field>
+            <input (keyup)="applyFilter($any($event.target).value)" matInput placeholder="Search Name">
+        </mat-form-field>
+    </div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      
+        <!-- Id -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Id </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+        </ng-container>
+      
+        <!-- Status Column -->
+        <ng-container matColumnDef="accountstatus">
+          <th mat-header-cell *matHeaderCellDef>Account Status</th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="element.accountstatus == 0">
+                Non-Active
+            </div>
+            <div *ngIf="element.accountstatus == 1">
+                Active
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Operation column-->
+        <ng-container matColumnDef="#">
+            <th mat-header-cell *matHeaderCellDef>Operation</th>
+            <td mat-cell *matCellDef="let element">
+                <form autocomplete="off" #statusdata="ngForm" (ngSubmit)="statuss(element.username,statusdata)">
+                    <input *ngIf="element.accountstatus == 0" #accountstatus (ngModel)="accountstatus"  type="radio" name="accountstatus" value="1"><label *ngIf="element.accountstatus == 0" style="color:green;font-weight:bold;">Enable</label>
+                    <input *ngIf="element.accountstatus == 1" #accountstatus (ngModel)="accountstatus" type="radio" name="accountstatus" value="0"><label *ngIf="element.accountstatus == 1" style="color:red;font-weight:bold;">Disable</label>
+                    <br/>
+                    <input type="submit" class="btn btn-primary btn-sm">
+                </form>
+            </td>
+        </ng-container>
+
+
+        <!-- cheque column-->
+        <ng-container matColumnDef="#1">
+            <th mat-header-cell *matHeaderCellDef> Cheque Request </th>
+            <td mat-cell *matCellDef="let element">
+                <!---->
+                <div *ngIf="element.chequerequest">
+                    <label>Request Account : {{element.chequerequest}}</label><br>
+                    <label *ngIf="element.chequerequeststatus">Request Status  : {{element.chequerequeststatus}}</label><br>
+                    
+                    <form autocomplete="off" #chequerequestdata="ngForm" (ngSubmit)="chequeByAdmin(element.username,chequerequestdata)" *ngIf="element.chequerequeststatus == null">
+                        <input #chequerequeststatus (ngModel)="chequerequeststatus"  type="radio" name="chequerequeststatus" value="Approve">Approve
+                        <input #chequerequeststatus (ngModel)="chequerequeststatus" type="radio" name="chequerequeststatus" value="Decline">Decline
+                        <br/>
+                        <input type="submit" class="btn btn-primary btn-sm">
+                    </form>
+                </div>
+            </td>
+        </ng-container>
+
+
+
+         <!-- loan column-->
+         <ng-container matColumnDef="#2">
+            <th mat-header-cell *matHeaderCellDef> Loan Request </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.loanrequest">
+                    <label>Loan Account : {{element.loanrequest}}</label><br>
+                    <label>Loan Amount : ₹{{element.loanamount}}</label><br>
+                    <label *ngIf="element.loanstatus">Loan Status : {{element.loanstatus}}</label><br>
+                    <form autocomplete="off" #loanrequestdata="ngForm" (ngSubmit)="loanByAdmin(element.username,loanrequestdata)" *ngIf="element.loanstatus == null">
+                        <input #loanstatus (ngModel)="loanstatus"  type="radio" name="loanstatus" value="Approve">Approve
+                        <input #loanstatus (ngModel)="loanstatus" type="radio" name="loanstatus" value="Decline">Decline
+                        <br/>
+                        <input type="submit" class="btn btn-primary btn-sm">
+                    </form>
+
+                </div>
+            </td>
+        </ng-container>
+
+      
+     
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <div>
+        <mat-paginator [length]="200" [pageSize]="3" aria-label="Select page">
+        </mat-paginator>  
+      </div>
+ 
+</div>
+
